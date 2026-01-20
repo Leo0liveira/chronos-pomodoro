@@ -5,7 +5,8 @@ import { CountDown } from './components/CountDown';
 import Input from './components/DefaultInput';
 import { Cycles } from './components/Cycles';
 import { DefaultButton } from './components/DefaultButton';
-import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
+import { PlayCircleIcon } from 'lucide-react';
+import { Footer } from './components/Footer';
 
 import './styles/theme.css';
 import './styles/global.css';
@@ -31,7 +32,6 @@ export function App() {
             type='text' 
             placeholder='Digite algo'/>
         </div>
-        
         <div className="formRow">
           <span> Nesse ciclo
           <strong> descanse </strong>
@@ -39,18 +39,18 @@ export function App() {
           <strong> 5 minutos. </strong>
           </span>
         </div>
-
         <div className="formRow">
           <Cycles/>
         </div>
+          <div className='formRow'>
+            <DefaultButton icon={<PlayCircleIcon />} />
+          </div>
+        </form>
+      </Container>
 
-        <div className="formRow">
-          <DefaultButton icon={<PlayCircleIcon />} color='green' />
-          <DefaultButton icon={<StopCircleIcon />} color='red' />
-        </div>
-
-      </form>
-    </Container>
-  </>
-  )
+      <Container>
+        <Footer />
+      </Container>
+    </>
+  );
 }
