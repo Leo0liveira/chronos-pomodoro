@@ -4,8 +4,12 @@ import { DefaultButton } from "../DefaultButton";
 import { Input } from "../DefaultInput";
 
 export function MainForm() {
+  function handleSubmit(event: React.FormEvent) {
+    event.preventDefault();
+    // Add form submission logic here
+  }
   return (
-    <form className="form" action="">
+    <form onSubmit={handleSubmit} className="form" action="">
       <div className="formRow">
         <Input
           labelText="task"
