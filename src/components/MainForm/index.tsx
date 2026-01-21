@@ -5,17 +5,21 @@ import { Input } from "../DefaultInput";
 import { useRef } from "react";
 import type { TaskModel } from "../../models/TaskModel";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
+import { getNextCycle } from "../../utils/getNextCycle";
 
 export function MainForm() {
-  const { setState } = useTaskContext();
-  const task = useRef<HTMLInputElement>(null);
+  const { state, setState } = useTaskContext();
+  const taskNameInput = useRef<HTMLInputElement>(null);
+
+  // ciclos
+  const nextCycle = getNextCycle(state.currentCycle);
 
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (task.current === null) return;
+    if (taskNameInput.current === null) return;
 
-    const taskName = task.current.value.trim();
+    const taskName = taskNameInput.current.value.trim();
 
     if (!taskName) {
       alert("Digite o nome da tarefa");
@@ -39,7 +43,7 @@ export function MainForm() {
         ...prevState,
         config: { ...prevState.config },
         activeTask: newTask,
-        currentCycle: 1, // Conferir
+        currentCycle: nextCycle,
         secondsRemaining, // Conferir
         formattedSecondsRemaining: "00:00", // Conferir
         tasks: [...prevState.tasks, newTask],
@@ -55,7 +59,7 @@ export function MainForm() {
           id="meuInput"
           type="text"
           placeholder="Digite algo"
-          ref={task}
+          ref={taskNameInput}
         />
       </div>
 
