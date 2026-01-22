@@ -1,5 +1,5 @@
 import { TrashIcon } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Container } from "../../components/Container";
 import { DefaultButton } from "../../components/DefaultButton";
 import { Heading } from "../../components/Heading";
@@ -13,6 +13,10 @@ import { sortTasks, type SortTasksOptions } from "../../utils/sortTasks";
 import { TaskActionTypes } from "../../contexts/TaskContext/taskActions";
 
 export function History() {
+  useEffect(() => {
+    document.title = "Histórico | Chronos Pomodoro";
+  }, []);
+
   const { state, dispatch } = useTaskContext();
   const hasTasks = state.tasks.length > 0;
 
